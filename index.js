@@ -2,8 +2,9 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const fs = require('fs');
+const generateFile = require('./src/generateFile')
 const { listenerCount } = require('process');
+const answers = [];
 //THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
 const managerQuestions = [
     {
@@ -82,90 +83,44 @@ const internQuestions = [
         name: "school",
     },
 ]
-inquirer.prompt(managerQuestions).then((managerAnswers) => {
-    console.log('managerAnswers', managerAnswers)
-    inquirer.prompt(addEngineerOrIntern).then((choiceAnswers) => {
-        console.log('choiceAnswers', choiceAnswers
-        )
-        if (choiceAnswers.type === 'engineer') {
-            inquirer.prompt(engineerQuestions).then((engineerAnswers) => {
-                inquirer.prompt([{ type: 'list', name: 'choice', message: "Add another team member or would you like to exit?", choices: ['Yes', 'No'] }]).then((finalAnswers) => {
-                    if (finalAnswers.choice === 'Yes') {
-                        inquirer.prompt([{ type: 'list', name: 'choice', message: "Do you want to add another intern, engineer or manager or would you like to exit?", choices: ['intern', 'engineer', 'manager', 'exit'] }]).then((choiceAnswers) => {
-                            if (choiceAnswers.choice === 'intern') {
-                                inquirer.prompt(internQuestions).then((internAnswers) => {
-                                    //To Do - Run Generate page function 
-                                })
-                            }
-                        })
-                    }
-                })
-            })
-        } else {
-            if (choiceAnswers.type === 'intern') {
-                inquirer.prompt(internQuestions).then((internAnswers) => {
-                    inquirer.prompt([{ type: 'list', name: 'choice', message: "Do you want to add another intern, engineer or manager or would you like to exit?", choices: ['intern', 'engineer', 'manager', 'exit'] }]).then((finalAnswers) => {
-                        if (finalAnswers.choice === 'intern') {
-                            inquirer.prompt(internQuestions)
-                        } else if
-                            (finalAnswers.choice === 'engineer') {
 
-                        } else if (finalAnswers.choice === 'manager') {
-
-                        } else {
-                            return
-                        }
-                    })
-                })
-            }
+function internQuestion() {
+    inquirer.prompt(internQuestions).then((internAnswers) => {
+        const intern = new Intern(internAnswers)
+        answers.push(intern)
+        finalQuestion();
+    })
+}
+function engineerQuestion() {
+    inquirer.prompt(engineerQuestions).then((engineerAnswers) => {
+        const engineer = new Engineer(engineerAnswers)
+        answers.push(engineer)
+        finalQuestion();
+    })
+}
+function managerQuestion() {
+    inquirer.prompt(managerQuestions).then((managerAnswers) => {
+        const manager = new Manager(managerAnswers)
+        answers.push(manager)
+        finalQuestion();
+    })
+}
+function finalQuestion() {
+    inquirer.prompt([{ type: 'list', name: 'choice', message: "Do you want to add another intern, engineer or manager or would you like to exit?", choices: ['intern', 'engineer', 'manager', 'exit'] }]).then((choiceAnswers) => {
+        answers.push(choiceAnswers)
+        if (choiceAnswers.choice === 'exit'){
+            generateFile(answers)
+        }
+        if (choiceAnswers.choice === 'intern') {
+            internQuestion();
+        }
+        if (choiceAnswers.choice === 'manager') {
+            managerQuestion();
+        }
+        if (choiceAnswers.choice === 'engineer') {
+            engineerQuestion();
         }
     })
-
-});
-// Function writeToFile
-function writeToFile(fileName, content) {
-    const name = fileName.toLowerCase().split(' ').join('_')
-    fs.writeFile(`./${name}.html`, content, () => {
-    })
-};
-
-// Function generateHTML content
-function generateHTML(answers) {
-    let results = ''
-    for (let i = 0; i < answers.length; i++) {
-        const result = generateEmployeeHTML(answers[i])
-        results += result
-    }
-    return results 
 }
-function generateEmployeeHTML(data) {
-    return `
-    <div>
-    <div class="item">
-        <div class="item-header">
-            <div>
-                ${data.name}
-            </div>
-            <div>
-                ${data.role}
-            </div>
-        </div>
 
-        <div class="item-content">
-            <div>
-                <div>ID:</div>
-                <div>${data.id}</div>
-            </div>
-            <div>
-                <div>Email:</div>
-                <div>${data.email}</div>
-            </div>
-            <div>
-                <div>Special ID:</div>
-                <div>${data.specialId}</div>
-            </div>
-        </div>
-    </div>
-</div>
-    `
-}
+managerQuestion();

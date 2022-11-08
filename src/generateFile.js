@@ -36,7 +36,7 @@ function generateEmployeeHTML(data) {
 </div>
     `
 }
-// Function generateHTML content
+// Function generateHTML content based off of filtered answers 
 function generateHTML(answers) {
     let results = '';
     const filteredAnswers = answers.filter((answer) => {
@@ -93,7 +93,7 @@ function generateHTML(answers) {
 // TODO: Create a function to initialize app
 function generateFile(answers) { 
     const content = generateHTML(answers)
-    writeToFile('teamProfile', content)
+    writeToFile('Team Profile', content)
     
 }
 module.exports = generateFile;

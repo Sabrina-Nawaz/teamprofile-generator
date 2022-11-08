@@ -83,7 +83,7 @@ const internQuestions = [
         name: "school",
     },
 ]
-
+//Created internQuestion function to hold intern questions and the answers 
 function internQuestion() {
     inquirer.prompt(internQuestions).then((internAnswers) => {
         const intern = new Intern(internAnswers)
@@ -91,6 +91,7 @@ function internQuestion() {
         finalQuestion();
     })
 }
+//Created engineerQuestion function to hold engineer questions and the answers 
 function engineerQuestion() {
     inquirer.prompt(engineerQuestions).then((engineerAnswers) => {
         const engineer = new Engineer(engineerAnswers)
@@ -98,6 +99,7 @@ function engineerQuestion() {
         finalQuestion();
     })
 }
+//Created managerQuestion function to hold manager questions and the answers 
 function managerQuestion() {
     inquirer.prompt(managerQuestions).then((managerAnswers) => {
         const manager = new Manager(managerAnswers)
@@ -105,6 +107,7 @@ function managerQuestion() {
         finalQuestion();
     })
 }
+//Created finalQuestion function to hold the option of adding another employee or exiting 
 function finalQuestion() {
     inquirer.prompt([{ type: 'list', name: 'choice', message: "Do you want to add another intern, engineer or manager or would you like to exit?", choices: ['intern', 'engineer', 'manager', 'exit'] }]).then((choiceAnswers) => {
         answers.push(choiceAnswers)

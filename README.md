@@ -22,11 +22,19 @@
 ## Usage
 
   To use the program, you need to run the `node index.js` command in the terminal and then answer a few prompts that come up pertaining to your employees. When the prompts are all answered, the `teamprofile.html` file generate in your code editor under the dist folder.
+  
+  [Team-Generator Demo.webm](https://user-images.githubusercontent.com/61954667/200964338-1b644f9a-f659-4f69-89b5-c36e974197ac.webm)
+  
+  ![Demo screenshot](https://user-images.githubusercontent.com/61954667/200964533-f9020ce6-e48b-4df0-b091-5deafd7e9ac7.png)
 
 ## Tests
 
   To run the tests for this program, enter the `npm run test` command in the root directory in the terminal and jest will run them for you. Note, to install jest npm, you must run the command `npm i jest`. 
   
+  [Team-Generator Tests.webm](https://user-images.githubusercontent.com/61954667/200964429-8dc42a60-98b7-491e-a8af-0c4030f6c074.webm)
+  
+  ![Tests Pass](https://user-images.githubusercontent.com/61954667/200964497-fa9ba0c2-905f-4369-ac9c-f8e021ce7fb2.png)
+
 ## Installation
 
   To install this program, please clone the repo from GitHub using the following command: 

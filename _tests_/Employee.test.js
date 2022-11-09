@@ -1,9 +1,16 @@
 const Employee = require('../lib/Employee');
-const employee = new Employee();
 
-employee.name = 'Sabrina'
-employee.email = 'sn@gmail.com'
-employee.id = 7
+const engineerProps={
+    name:"Sabrina",
+    email:"sn@gmail.com",
+    id:7
+}
+const employee= new Employee(engineerProps);
+
+
+// employee.name = 'Sabrina'
+// employee.email = 'sn@gmail.com'
+// employee.id = 7
 
 test('employee has a name', () => {
     expect(employee.name).toBe('Sabrina');

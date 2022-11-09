@@ -1,9 +1,15 @@
 const Engineer = require('../lib/Engineer');
-const engineer = new Engineer('fooguy64');
 
-engineer.name = 'Sabrina'
-engineer.email = 'sn@gmail.com'
-engineer.id = 7
+const engineerProps={
+    name:"Sabrina",
+    email:"sn@gmail.com",
+    id:7
+}
+const engineer = new Engineer(engineerProps,'fooguy64');
+
+// engineer.name = 'Sabrina'
+// engineer.email = 'sn@gmail.com'
+// engineer.id = 7
 
 test('engineer has a name', () => {
     expect(engineer.name).toBe('Sabrina');

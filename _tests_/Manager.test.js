@@ -1,9 +1,14 @@
 const Manager = require('../lib/Manager');
-const manager = new Manager(100);
+const engineerProps={
+    name:"Sabrina",
+    email:"sn@gmail.com",
+    id:7
+}
+const manager = new Manager(engineerProps,100);
 
-manager.name = 'Sabrina'
-manager.email = 'sn@gmail.com'
-manager.id = 7
+// manager.name = 'Sabrina'
+// manager.email = 'sn@gmail.com'
+// manager.id = 7
 
 test('manager has a name', () => {
     expect(manager.name).toBe('Sabrina');

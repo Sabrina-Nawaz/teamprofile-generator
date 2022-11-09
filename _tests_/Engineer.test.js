@@ -7,10 +7,6 @@ const engineerProps={
 }
 const engineer = new Engineer(engineerProps,'fooguy64');
 
-// engineer.name = 'Sabrina'
-// engineer.email = 'sn@gmail.com'
-// engineer.id = 7
-
 test('engineer has a name', () => {
     expect(engineer.name).toBe('Sabrina');
 });

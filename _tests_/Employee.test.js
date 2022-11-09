@@ -7,11 +7,6 @@ const engineerProps={
 }
 const employee= new Employee(engineerProps);
 
-
-// employee.name = 'Sabrina'
-// employee.email = 'sn@gmail.com'
-// employee.id = 7
-
 test('employee has a name', () => {
     expect(employee.name).toBe('Sabrina');
 });

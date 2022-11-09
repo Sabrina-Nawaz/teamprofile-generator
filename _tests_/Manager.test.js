@@ -6,10 +6,6 @@ const engineerProps={
 }
 const manager = new Manager(engineerProps,100);
 
-// manager.name = 'Sabrina'
-// manager.email = 'sn@gmail.com'
-// manager.id = 7
-
 test('manager has a name', () => {
     expect(manager.name).toBe('Sabrina');
 });

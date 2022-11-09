@@ -2,11 +2,20 @@ const fs = require('fs');
 // Function writeToFile
 function writeToFile(fileName, content) {
     const name = fileName.toLowerCase().split(' ').join('_')
-    fs.writeFile(`./dist/${name}.html`, content)
+    fs.writeFile(`./dist/${name}.html`, content, () => {})
 };
 // Function that generates the Employee HTML file based on the answers 
 function generateEmployeeHTML(data) {
     return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Team Profile</title>
+    </head>
+    <body>
     <div>
     <div class="item">
         <div class="item-header">
@@ -17,7 +26,6 @@ function generateEmployeeHTML(data) {
                 ${data.getRole()}
             </div>
         </div>
-
         <div class="item-content">
             <div>
                 <div>ID:</div>
@@ -34,9 +42,11 @@ function generateEmployeeHTML(data) {
         </div>
     </div>
 </div>
+</body>
+</html>
     `
 }
-// Function generateHTML content based off of filtered answers 
+// Function generateHTML content based off of filtered answers
 function generateHTML(answers) {
     let results = '';
     const filteredAnswers = answers.filter((answer) => {
@@ -49,9 +59,15 @@ function generateHTML(answers) {
     return `<html>
 
     <head>
-        <title>Team Profile Generator</title>
+    <title>Team Profile</title>
         <style>
             body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            } 
+
+            #results {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 6px;
@@ -83,8 +99,10 @@ function generateHTML(answers) {
     </head>
     
     <body>
-    
+    <h1>Team Profile</h1>
+    <div id="results">
     ${results}
+    </div>
     
     </body>
     
@@ -93,7 +111,7 @@ function generateHTML(answers) {
 // TODO: Create a function to initialize app
 function generateFile(answers) { 
     const content = generateHTML(answers)
-    writeToFile('Team Profile', content)
+    writeToFile('teamProfile', content)
     
 }
 module.exports = generateFile;
